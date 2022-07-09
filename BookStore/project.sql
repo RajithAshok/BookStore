@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `books` (
   `title` varchar(128) NOT NULL,
   `price` decimal(7,2) NOT NULL,
   `subject` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB;
 
 -- --------------------------------------------------------
 
@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS `cart` (
   `userid` varchar(20) NOT NULL DEFAULT '',
   `isbn` char(10) NOT NULL DEFAULT '',
   `qty` int(5) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB;
 
 -- --------------------------------------------------------
 
@@ -65,7 +65,7 @@ CREATE TABLE IF NOT EXISTS `members` (
   `password` varchar(20) DEFAULT NULL,
   `creditcardtype` varchar(10) DEFAULT NULL,
   `creditcardnumber` char(16) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB;
 
 --
 -- Dumping data for table `members`
@@ -86,7 +86,7 @@ CREATE TABLE IF NOT EXISTS `odetails` (
   `isbn` char(10) NOT NULL DEFAULT '',
   `qty` int(5) NOT NULL,
   `price` decimal(7,2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB;
 
 -- --------------------------------------------------------
 
@@ -103,7 +103,7 @@ CREATE TABLE IF NOT EXISTS `orders` (
   `shipCity` varchar(30) DEFAULT NULL,
   `shipState` varchar(20) DEFAULT NULL,
   `shipZip` int(5) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB;
 
 --
 -- Indexes for dumped tables
