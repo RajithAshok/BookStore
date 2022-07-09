@@ -1622,6 +1622,7 @@ public class Main extends Application {
 		private int	quantity;
 		private float price;
 
+		@SuppressWarnings("removal")
 		private cartQuery(String isbn, String title, int quantity){
 			this.isbn=new String(isbn);
 			this.title=new String(title);
