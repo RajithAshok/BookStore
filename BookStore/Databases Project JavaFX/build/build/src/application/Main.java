@@ -240,7 +240,7 @@ public class Main extends Application {
 
 		ObservableList<String> cType=
 				FXCollections.observableArrayList(
-						"Amex",
+						"RuPay",
 						"Visa"
 						);
 		final ComboBox comboBox2=new ComboBox(cType);

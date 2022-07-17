@@ -23,14 +23,14 @@ public class DatabaseHandler {
 		boolean registered=false;
 		// Load JDBC Driver
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
 			System.out.println("Cannot find JDBC Driver");
 		}
 		//Connect to the database
 		Connection conn = null;
 		try {
-			conn = DriverManager.getConnection("jdbc:mysql://localhost/project?" + "user=root&password=12341234");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project1","root","12345678");
 			// Do something with the Connection
 		} catch (SQLException ex) {
 			// handle any errors
@@ -85,7 +85,7 @@ public class DatabaseHandler {
 		//Connect to the database
 		Connection conn = null;
 		try {
-			conn = DriverManager.getConnection("jdbc:mysql://localhost/project?" + "user=root&password=12341234");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project1","root","12345678");
 			System.out.println("Connected!");
 			// Do something with the Connection
 		} catch (SQLException ex) {
@@ -129,6 +129,7 @@ public class DatabaseHandler {
 
 /*	//Browse by subject. 
 	//Based on user input for subject 'type'. Evaluates inside an array of strings of index [type-1]. Works similar to the previous functions.
+	
 	public ResultSet getBooksBySubject(String subject) {
 
 		String title;
@@ -149,7 +150,7 @@ public class DatabaseHandler {
 		//Connect to the database
 		Connection conn = null;
 		try {
-			conn = DriverManager.getConnection("jdbc:mysql://localhost/project?" + "user=root&password=12341234");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project1","root","12345678");
 			// Do something with the Connection
 		} catch (SQLException ex) {
 			// handle any errors
@@ -199,7 +200,7 @@ public class DatabaseHandler {
 		//Connect to the database
 		Connection conn = null;
 		try {
-			conn = DriverManager.getConnection("jdbc:mysql://localhost/project?" + "user=root&password=12341234");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project1","root","12345678");
 			// Do something with the Connection
 		} catch (SQLException ex) {
 			// handle any errors
@@ -257,7 +258,7 @@ public class DatabaseHandler {
 		//Connect to the database
 		Connection conn = null;
 		try {
-			conn = DriverManager.getConnection("jdbc:mysql://localhost/project?" + "user=root&password=12341234");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project1","root","12345678");
 			// Do something with the Connection
 		} catch (SQLException ex) {
 			// handle any errors
@@ -320,7 +321,7 @@ public class DatabaseHandler {
 		//Connect to the database
 		Connection conn = null;
 		try {
-			conn = DriverManager.getConnection("jdbc:mysql://localhost/project?" + "user=root&password=12341234");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project1","root","12345678");
 			// Do something with the Connection
 		} catch (SQLException ex) {
 			// handle any errors
