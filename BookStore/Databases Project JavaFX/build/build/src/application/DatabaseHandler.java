@@ -10,8 +10,6 @@ import javafx.collections.ObservableList;
 
 @SuppressWarnings("unused")
 
-//The databasehandler, it contains the functions to connect to the DB and the other functions sent
-//to the server as well.
 public class DatabaseHandler {
 
 	//Function to register a new user!
@@ -21,19 +19,19 @@ public class DatabaseHandler {
 					throws IOException, SQLException{
 
 		boolean registered=false;
-		// Load JDBC Driver
+		
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
 			System.out.println("Cannot find JDBC Driver");
 		}
-		//Connect to the database
+
 		Connection conn = null;
 		try {
 			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project1","root","12345678");
-			// Do something with the Connection
+		
 		} catch (SQLException ex) {
-			// handle any errors
+		
 			System.out.println("SQLException: " + ex.getMessage());
 			System.out.println("SQLState: " + ex.getSQLState());
 			System.out.println("VendorError: " + ex.getErrorCode());
@@ -73,21 +71,21 @@ public class DatabaseHandler {
 
 
 	//This is the function that logs into the server. It's pretty much very similar to the previous
-	//Register function.
+	//Login Function.
 	public boolean login(String userID, String password) throws IOException, SQLException{
 		boolean exists=false;
-		// Load JDBC Driver
+		
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
 			System.out.println("Cannot find JDBC Driver");
 		}
-		//Connect to the database
+		
 		Connection conn = null;
 		try {
 			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project1","root","12345678");
 			System.out.println("Connected!");
-			// Do something with the Connection
+		
 		} catch (SQLException ex) {
 			// handle any errors
 			System.out.println("SQLException: " + ex.getMessage());

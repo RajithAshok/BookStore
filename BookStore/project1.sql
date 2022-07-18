@@ -4,13 +4,13 @@ CREATE TABLE IF NOT EXISTS books (
   title varchar(128) NOT NULL,
   price decimal(7,2) NOT NULL,
   subject varchar(30) NOT NULL
-) ENGINE=InnoDB;
+);
 
 CREATE TABLE IF NOT EXISTS cart (
   userid varchar(20) NOT NULL DEFAULT '',
   isbn char(10) NOT NULL DEFAULT '',
   qty int NOT NULL
-) ENGINE=InnoDB;
+);
 
 CREATE TABLE IF NOT EXISTS members (
   fname varchar(20) NOT NULL,
@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS members (
   password varchar(20) DEFAULT NULL,
   creditcardtype varchar(10) DEFAULT NULL,
   creditcardnumber char(16) DEFAULT NULL
-) ENGINE=InnoDB;
+);
 
 INSERT INTO members (fname, lname, address, city, state, zip, phone, email, userid, password, creditcardtype, creditcardnumber) VALUES
 ('rajith', 'ashok', 'sahakarnagar', 'bengaluru', 'karnataka', 560092, '9876543210', 'rajith@gmail.com', 'rajith', 'rajith', '', '1234123412341234'),
@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS odetails (
   isbn char(10) NOT NULL DEFAULT '',
   qty int NOT NULL,
   price decimal(7,2) NOT NULL
-) ENGINE=InnoDB;
+);
 
 CREATE TABLE IF NOT EXISTS orders (
   userid varchar(20) NOT NULL,
@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS orders (
   shipCity varchar(30) DEFAULT NULL,
   shipState varchar(20) DEFAULT NULL,
   shipZip int DEFAULT NULL
-) ENGINE=InnoDB;
+);
 
 ALTER TABLE books
  ADD PRIMARY KEY (isbn);
@@ -65,12 +65,25 @@ ALTER TABLE orders
  ADD PRIMARY KEY (ono), ADD KEY userid (userid);
 
 ALTER TABLE cart
-ADD CONSTRAINT cart_ibfk_1 FOREIGN KEY (userid) REFERENCES members (userid),
-ADD CONSTRAINT cart_ibfk_2 FOREIGN KEY (isbn) REFERENCES books (isbn);
+ADD FOREIGN KEY (userid) REFERENCES members (userid),
+ADD FOREIGN KEY (isbn) REFERENCES books (isbn);
 
 ALTER TABLE odetails
-ADD CONSTRAINT odetails_ibfk_1 FOREIGN KEY (ono) REFERENCES orders (ono),
-ADD CONSTRAINT odetails_ibfk_2 FOREIGN KEY (isbn) REFERENCES books (isbn);
+ADD FOREIGN KEY (ono) REFERENCES orders (ono),
+ADD FOREIGN KEY (isbn) REFERENCES books (isbn);
 
 ALTER TABLE orders
-ADD CONSTRAINT orders_ibfk_1 FOREIGN KEY (userid) REFERENCES members (userid);
+ADD FOREIGN KEY (userid) REFERENCES members (userid);
+
+-- Book entry
+insert into books values(1000, "John Green", "The Fault in Our Stars", 288.00, "Young Adult Fiction");
+insert into books values(1001, "Earnest Cline", "Ready PLayer One", 345.00, "Sci-Fi");
+insert into books values(1002, "Harper Lee", "To Kill a Mocking Bird", 245.00, "Southern Gothic Fiction");
+insert into books values(1003, "Stephen Hawking", "The Theory of Everthing", 198.00, "Science");
+insert into books values(1004, "James Dashner", "The Maze Runner", 301.00, "Young Adult Fiction");
+insert into books values(1005, "John Green", "The Abundance of Katherines", 299.00, "Young Adult Fiction");
+insert into books values(1006, "Nikola Tesla", "The Strange Life of Nikola Tesla", 509.00, "Biography");
+insert into books values(1007, "Neil DeGrasse Tyson", "Cosmic Queries: Star Talks", 1152.00, "Astronomy");
+insert into books values(1008, "Patrick Johnson", "The Physics of Star Wars", 869.00, "Film Criticism");
+insert into books values(1009, "John Green", "Looking for Atlanta", 236.00, "Young Adult Fiction");
+

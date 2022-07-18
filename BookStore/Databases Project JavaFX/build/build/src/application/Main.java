@@ -9,6 +9,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.*;
+import java.util.function.*;
 
 import javafx.application.Application;
 import javafx.beans.property.SimpleStringProperty;
@@ -32,6 +34,8 @@ import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
+import javafx.scene.control.TextFormatter.Change;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -580,7 +584,7 @@ public class Main extends Application {
 				Connection conn = null;
 				try {
 
-					conn = DriverManager.getConnection("jdbc:mysql://localhost/project?" + "user=root&password=12341234");
+					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project1","root","12345678");
 					// Do something with the Connection
 				} catch (SQLException ex) {
 					// handle any errors
@@ -645,11 +649,31 @@ public class Main extends Application {
 				browseStage.close();
 			}
 		});
+		
+		UnaryOperator<Change> integerFilter = change -> {
+		    String input = change.getText();
+		    if (input.matches("[0-9]*")) { 
+		        return change;
+		    }
+		    return null;
+		};
+
+		isbnSlot.setTextFormatter(new TextFormatter<String>(integerFilter));
+		
+		UnaryOperator<Change> integerFilter1 = change -> {
+		    String input = change.getText();
+		    if (input.matches("[0-9]*")) { 
+		        return change;
+		    }
+		    return null;
+		};
+
+		quantity.setTextFormatter(new TextFormatter<String>(integerFilter1));
 
 		addCart.setOnAction(new EventHandler<ActionEvent>(){
 			public void handle(ActionEvent e){
-				int isbn=Integer.parseInt(isbnSlot.getText());
-				int qty=Integer.parseInt(quantity.getText());
+				String isbn = isbnSlot.getText();
+				int qty = Integer.parseInt(quantity.getText());
 
 				// Load JDBC Driver
 				try {
@@ -661,7 +685,7 @@ public class Main extends Application {
 				Connection conn = null;
 				try {
 
-					conn = DriverManager.getConnection("jdbc:mysql://localhost/project?" + "user=root&password=12341234");
+					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project1","root","12345678");
 					// Do something with the Connection
 				} catch (SQLException ex) {
 					// handle any errors
@@ -674,7 +698,7 @@ public class Main extends Application {
 
 				try{
 					PreparedStatement preparedSt = conn.prepareStatement(query);
-					preparedSt.setString(1, "karimahmed");
+					preparedSt.setString(1, "rajith");
 					preparedSt.setString(2, isbnSlot.getText());
 					preparedSt.setInt(3, qty);
 
@@ -686,7 +710,7 @@ public class Main extends Application {
 					addedToCart.setText("You have run a duplicate entry, please select a different\n"
 							+ "book/quantity");
 					System.err.println("There was an error retrieving data, system exiting.");
-					System.err.println(ex.getMessage());
+					System.out.println(ex.getMessage());
 				}
 
 
@@ -740,11 +764,32 @@ public class Main extends Application {
 		grid.add(isbnNotification, 0, 3);
 		TextField isbnSlot=new TextField();
 		grid.add(isbnSlot, 0, 4);
+		
+		UnaryOperator<Change> integerFilter = change -> {
+		    String input = change.getText();
+		    if (input.matches("[0-9]*")) { 
+		        return change;
+		    }
+		    return null;
+		};
+
+		isbnSlot.setTextFormatter(new TextFormatter<String>(integerFilter));
+		
 		Text qtyNotification=new Text("Quantity Here:");
 		grid.add(qtyNotification, 0, 5);
 		TextField quantity=new TextField();
 		grid.add(quantity, 0, 6);
 
+		UnaryOperator<Change> integerFilter1 = change -> {
+		    String input = change.getText();
+		    if (input.matches("[0-9]*")) { 
+		        return change;
+		    }
+		    return null;
+		};
+
+		quantity.setTextFormatter(new TextFormatter<String>(integerFilter1));
+		
 		Button addCart=new Button("Add to cart");
 		grid.add(addCart, 0, 7);
 		Text addedToCart=new Text();
@@ -788,7 +833,7 @@ public class Main extends Application {
 				Connection conn = null;
 				try {
 
-					conn = DriverManager.getConnection("jdbc:mysql://localhost/project?" + "user=root&password=12341234");
+					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project1","root","12345678");
 					// Do something with the Connection
 				} catch (SQLException ex) {
 					// handle any errors
@@ -835,7 +880,7 @@ public class Main extends Application {
 				Connection conn = null;
 				try {
 
-					conn = DriverManager.getConnection("jdbc:mysql://localhost/project?" + "user=root&password=12341234");
+					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project1","root","12345678");
 					// Do something with the Connection
 				} catch (SQLException ex) {
 					// handle any errors
@@ -873,7 +918,7 @@ public class Main extends Application {
 		//Add to cart Button.
 		addCart.setOnAction(new EventHandler<ActionEvent>(){
 			public void handle(ActionEvent e){
-				int isbn=Integer.parseInt(isbnSlot.getText());
+				String isbn = isbnSlot.getText();
 				int qty=Integer.parseInt(quantity.getText());
 
 				// Load JDBC Driver
@@ -886,7 +931,7 @@ public class Main extends Application {
 				Connection conn = null;
 				try {
 
-					conn = DriverManager.getConnection("jdbc:mysql://localhost/project?" + "user=root&password=12341234");
+					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project1","root","12345678");
 					// Do something with the Connection
 				} catch (SQLException ex) {
 					// handle any errors
@@ -899,8 +944,8 @@ public class Main extends Application {
 
 				try{
 					PreparedStatement preparedSt = conn.prepareStatement(query);
-					preparedSt.setString(1, "karimahmed");
-					preparedSt.setString(2, isbnSlot.getText());
+					preparedSt.setString(1, "rajith");
+					preparedSt.setString(2, isbn);
 					preparedSt.setInt(3, qty);
 
 					preparedSt.execute();
@@ -1003,7 +1048,7 @@ public class Main extends Application {
 				Connection conn = null;
 				try {
 
-					conn = DriverManager.getConnection("jdbc:mysql://localhost/project?" + "user=root&password=12341234");
+					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project1","root","12345678");
 					// Do something with the Connection
 				} catch (SQLException ex) {
 					// handle any errors
@@ -1042,7 +1087,7 @@ public class Main extends Application {
 				Connection conn = null;
 				try {
 
-					conn = DriverManager.getConnection("jdbc:mysql://localhost/project?" + "user=root&password=12341234");
+					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project1","root","12345678");
 					// Do something with the Connection
 				} catch (SQLException ex) {
 					// handle any errors
@@ -1080,7 +1125,7 @@ public class Main extends Application {
 				Connection conn = null;
 				try {
 
-					conn = DriverManager.getConnection("jdbc:mysql://localhost/project?" + "user=root&password=12341234");
+					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project1","root","12345678");
 					// Do something with the Connection
 				} catch (SQLException ex) {
 					// handle any errors
@@ -1211,7 +1256,7 @@ public class Main extends Application {
 				//Connect to the database
 				Connection conn = null;
 				try {
-					conn = DriverManager.getConnection("jdbc:mysql://localhost/project?" + "user=root&password=12341234");
+					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project1","root","12345678");
 					// Do something with the Connection
 				} catch (SQLException ex) {
 					// handle any errors
@@ -1251,7 +1296,7 @@ public class Main extends Application {
 				//Connect to the database
 				Connection conn = null;
 				try {
-					conn = DriverManager.getConnection("jdbc:mysql://localhost/project?" + "user=root&password=12341234");
+					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project1","root","12345678");
 					// Do something with the Connection
 				} catch (SQLException ex) {
 					// handle any errors
@@ -1379,7 +1424,7 @@ public class Main extends Application {
 				//Connect to the database
 				Connection conn = null;
 				try {
-					conn = DriverManager.getConnection("jdbc:mysql://localhost/project?" + "user=root&password=12341234");
+					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project1","root","12345678");
 					// Do something with the Connection
 				} catch (SQLException ex) {
 					// handle any errors
@@ -1417,7 +1462,7 @@ public class Main extends Application {
 				//Connect to the database
 				Connection conn2 = null;
 				try {
-					conn2 = DriverManager.getConnection("jdbc:mysql://localhost/project?" + "user=root&password=12341234");
+					conn2 = DriverManager.getConnection("jdbc:mysql://localhost:3306/project1","root","12345678");
 					// Do something with the Connection
 				} catch (SQLException ex) {
 					// handle any errors
@@ -1451,7 +1496,7 @@ public class Main extends Application {
 				//Connect to the database
 				Connection conn3 = null;
 				try {
-					conn3 = DriverManager.getConnection("jdbc:mysql://localhost/project?" + "user=root&password=12341234");
+					conn3 = DriverManager.getConnection("jdbc:mysql://localhost:3306/project1","root","12345678");
 					// Do something with the Connection
 				} catch (SQLException ex) {
 					// handle any errors
