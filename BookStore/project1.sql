@@ -86,4 +86,13 @@ insert into books values(1006, "Nikola Tesla", "The Strange Life of Nikola Tesla
 insert into books values(1007, "Neil DeGrasse Tyson", "Cosmic Queries: Star Talks", 1152.00, "Astronomy");
 insert into books values(1008, "Patrick Johnson", "The Physics of Star Wars", 869.00, "Film Criticism");
 insert into books values(1009, "John Green", "Looking for Atlanta", 236.00, "Young Adult Fiction");
-
+insert into books values(1010, "John Green", "The fault in our stars", 540.00, "Romance");
+insert into books values(1011,"john green","paper town",320.00,"young adult fiction");
+insert into books values(1012,"John Green","Turtles all the way down",456.00,"young adult fiction");
+insert into books values(1013,"Patrick Johnson","Black Queer studies",500.00,"biography");
+insert into books values(1014,"Patrick Johnson","Sweet Tea",120.00,"romantic play");
+insert into books values(1015,"Abdul Kalam","Wings of fire",600.00,"Autobiography");
+insert into books values(1016,"Ruskin Bond","The perfect murder",450.00,"Mystery");
+insert into books values(1017,"Ruskin Bond","The house of stranger stories",330.00,"Mystery");
+insert into books values(1018,"John Bunyan","Pilgrim's Progress",150.00,"autobiography");
+insert into books values(1019,"Robinson Crusoe","Daniel Defoe",220.00,"tragic rom-com");
