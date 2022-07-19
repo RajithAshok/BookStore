@@ -1,50 +1,24 @@
 package application;
 
+import javafx.application.*;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.sql.*;
 import java.util.*;
-import java.util.function.*;
-
-import javafx.application.Application;
+import javafx.util.*;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.stage.Stage;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Control;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TableColumn;
+import javafx.collections.*;
+import javafx.event.*;
+import javafx.geometry.*;
+import javafx.stage.*;
+import javafx.scene.*;
+import javafx.scene.control.*;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
-import javafx.scene.control.TextFormatter;
-import javafx.scene.control.TextFormatter.Change;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
-import javafx.util.Callback;
+import javafx.scene.text.*;
+
 
 
 @SuppressWarnings("unused")
@@ -60,7 +34,7 @@ public class Main extends Application {
 	}
 
 
-
+	String userlogged;
 	/*
 	 * 
 	 * 
@@ -69,7 +43,10 @@ public class Main extends Application {
 	 * 
 	 */
 	@Override
+	
+	
 	public void start(Stage primaryStage) {
+		
 		try {
 			primaryStage.setTitle("Online Bookstore Application");
 			GridPane grid = new GridPane();
@@ -88,7 +65,8 @@ public class Main extends Application {
 
 			TextField userTextField = new TextField();
 			grid.add(userTextField, 1, 1);
-
+			
+			
 			Label pw = new Label("Password:");
 			grid.add(pw, 0, 2);
 
@@ -100,7 +78,7 @@ public class Main extends Application {
 			hbBtn.setAlignment(Pos.BOTTOM_LEFT);
 			hbBtn.getChildren().add(logBtn);
 			grid.add(hbBtn, 0, 4);
-
+			
 			Button regBtn = new Button("Register");
 			HBox hbBtn2 = new HBox(10);
 			hbBtn.setAlignment(Pos.BOTTOM_RIGHT);
@@ -120,6 +98,7 @@ public class Main extends Application {
 
 				@Override
 				public void handle(ActionEvent e) {
+					 userlogged = userTextField.getText();
 					boolean exists=false;
 					try {
 						exists=dbmanager.login(userTextField.getText(), pwBox.getText());
@@ -166,7 +145,7 @@ public class Main extends Application {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void startRegister(Stage stage){
 		Stage regStage = new Stage();
-		regStage.setTitle("Online Bookstore Application");
+		regStage.setTitle("Book Store");
 		GridPane grid = new GridPane();
 		Scene regScene=new Scene(grid, 800, 640);
 		regScene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
@@ -327,7 +306,7 @@ public class Main extends Application {
 
 	public void secondView(Stage stage){
 		Stage secondStage = new Stage();
-		secondStage.setTitle("Online Bookstore Application");
+		secondStage.setTitle("Book Store");
 		GridPane grid = new GridPane();
 		Scene secondScene=new Scene(grid, 800, 640);
 		secondScene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
@@ -342,12 +321,10 @@ public class Main extends Application {
 
 
 		Button oneBtn=new Button("Browse by subject");
-		Button twoBtn= new Button("Search by Author/Title/Subject");
+		Button twoBtn= new Button("Search by Author/Title");
 		Button threeBtn=new Button("View/Edit shopping Cart");
 		Button fourBtn=new Button("View check out Status");
-		Button fiveBtn=new Button("Check out");
 		Button sixBtn=new Button("One click check out");
-		Button sevenBtn=new Button("Personal Info");
 		Button eightBtn=new Button("Logout");
 
 
@@ -359,9 +336,7 @@ public class Main extends Application {
 		twoBtn.setMaxWidth(Double.MAX_VALUE);
 		threeBtn.setMaxWidth(Double.MAX_VALUE);
 		fourBtn.setMaxWidth(Double.MAX_VALUE);
-		fiveBtn.setMaxWidth(Double.MAX_VALUE);
 		sixBtn.setMaxWidth(Double.MAX_VALUE);
-		sevenBtn.setMaxWidth(Double.MAX_VALUE);
 		eightBtn.setMaxWidth(Double.MAX_VALUE);
 
 		VBox vbButtons = new VBox();
@@ -413,15 +388,6 @@ public class Main extends Application {
 			}
 		});
 
-/*		//The checkout button, omitted.
-
-		fiveBtn.setOnAction(new EventHandler<ActionEvent>(){
-			public void handle(ActionEvent e){
-
-
-			}
-		});*/
-
 		//The one click check out button.
 
 		sixBtn.setOnAction(new EventHandler<ActionEvent>(){
@@ -430,15 +396,6 @@ public class Main extends Application {
 				secondStage.close();
 			}
 		});
-
-/*		//The view/edit personal info button, omitted, not required in any of the phases!
-
-		sevenBtn.setOnAction(new EventHandler<ActionEvent>(){
-			public void handle(ActionEvent e){
-
-
-			}
-		});*/
 
 		//The logout Button
 
@@ -480,7 +437,8 @@ public class Main extends Application {
 				FXCollections.observableArrayList(
 						"Comedy",
 						"Cooking",
-						"Sports"
+						"Sports",
+						"Autobiography"
 						);
 		final ComboBox subjectBox = new ComboBox(subjects);
 		grid.add(subjectBox, 0, 1);
@@ -576,7 +534,7 @@ public class Main extends Application {
 
 				// Load JDBC Driver
 				try {
-					Class.forName("com.mysql.jdbc.Driver");
+					Class.forName("com.mysql.cj.jdbc.Driver");
 				} catch (ClassNotFoundException exp) {
 					System.out.println("Cannot find JDBC Driver");
 				}
@@ -650,26 +608,6 @@ public class Main extends Application {
 			}
 		});
 		
-		UnaryOperator<Change> integerFilter = change -> {
-		    String input = change.getText();
-		    if (input.matches("[0-9]*")) { 
-		        return change;
-		    }
-		    return null;
-		};
-
-		isbnSlot.setTextFormatter(new TextFormatter<String>(integerFilter));
-		
-		UnaryOperator<Change> integerFilter1 = change -> {
-		    String input = change.getText();
-		    if (input.matches("[0-9]*")) { 
-		        return change;
-		    }
-		    return null;
-		};
-
-		quantity.setTextFormatter(new TextFormatter<String>(integerFilter1));
-
 		addCart.setOnAction(new EventHandler<ActionEvent>(){
 			public void handle(ActionEvent e){
 				String isbn = isbnSlot.getText();
@@ -677,7 +615,7 @@ public class Main extends Application {
 
 				// Load JDBC Driver
 				try {
-					Class.forName("com.mysql.jdbc.Driver");
+					Class.forName("com.mysql.cj.jdbc.Driver");
 				} catch (ClassNotFoundException exp) {
 					System.out.println("Cannot find JDBC Driver");
 				}
@@ -698,7 +636,7 @@ public class Main extends Application {
 
 				try{
 					PreparedStatement preparedSt = conn.prepareStatement(query);
-					preparedSt.setString(1, "rajith");
+					preparedSt.setString(1, userlogged);
 					preparedSt.setString(2, isbnSlot.getText());
 					preparedSt.setInt(3, qty);
 
@@ -765,31 +703,12 @@ public class Main extends Application {
 		TextField isbnSlot=new TextField();
 		grid.add(isbnSlot, 0, 4);
 		
-		UnaryOperator<Change> integerFilter = change -> {
-		    String input = change.getText();
-		    if (input.matches("[0-9]*")) { 
-		        return change;
-		    }
-		    return null;
-		};
-
-		isbnSlot.setTextFormatter(new TextFormatter<String>(integerFilter));
-		
 		Text qtyNotification=new Text("Quantity Here:");
 		grid.add(qtyNotification, 0, 5);
 		TextField quantity=new TextField();
 		grid.add(quantity, 0, 6);
 
-		UnaryOperator<Change> integerFilter1 = change -> {
-		    String input = change.getText();
-		    if (input.matches("[0-9]*")) { 
-		        return change;
-		    }
-		    return null;
-		};
 
-		quantity.setTextFormatter(new TextFormatter<String>(integerFilter1));
-		
 		Button addCart=new Button("Add to cart");
 		grid.add(addCart, 0, 7);
 		Text addedToCart=new Text();
@@ -825,7 +744,7 @@ public class Main extends Application {
 
 				// Load JDBC Driver
 				try {
-					Class.forName("com.mysql.jdbc.Driver");
+					Class.forName("com.mysql.cj.jdbc.Driver");
 				} catch (ClassNotFoundException exp) {
 					System.out.println("Cannot find JDBC Driver");
 				}
@@ -872,7 +791,7 @@ public class Main extends Application {
 
 				// Load JDBC Driver
 				try {
-					Class.forName("com.mysql.jdbc.Driver");
+					Class.forName("com.mysql.cj.jdbc.Driver");
 				} catch (ClassNotFoundException exp) {
 					System.out.println("Cannot find JDBC Driver");
 				}
@@ -910,10 +829,7 @@ public class Main extends Application {
 				}
 			}
 		});
-
-
-
-
+		
 
 		//Add to cart Button.
 		addCart.setOnAction(new EventHandler<ActionEvent>(){
@@ -923,7 +839,7 @@ public class Main extends Application {
 
 				// Load JDBC Driver
 				try {
-					Class.forName("com.mysql.jdbc.Driver");
+					Class.forName("com.mysql.cj.jdbc.Driver");
 				} catch (ClassNotFoundException exp) {
 					System.out.println("Cannot find JDBC Driver");
 				}
@@ -944,7 +860,7 @@ public class Main extends Application {
 
 				try{
 					PreparedStatement preparedSt = conn.prepareStatement(query);
-					preparedSt.setString(1, "rajith");
+					preparedSt.setString(1, userlogged);
 					preparedSt.setString(2, isbn);
 					preparedSt.setInt(3, qty);
 
@@ -975,7 +891,9 @@ public class Main extends Application {
 		searchStage.setScene(searchScene);
 		searchStage.show();
 	}
-
+	
+	// View/Edit shopping Cart
+	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void editCart(Stage stage){
 		Stage editCartStage=new Stage();
@@ -1005,12 +923,11 @@ public class Main extends Application {
 		grid.add(qtyField, 0, 4);
 
 		Button showCart=new Button("View Cart");
-		Button updateCart=new Button("Update Cart");
 		Button deleteCart=new Button("Delete Entry from Cart");
 		Button back=new Button("Back");
 		HBox hbBtn = new HBox(10);
 		hbBtn.setAlignment(Pos.BOTTOM_LEFT);
-		hbBtn.getChildren().addAll(back, showCart, updateCart, deleteCart);
+		hbBtn.getChildren().addAll(back, showCart, deleteCart);
 		grid.add(hbBtn, 0, 5);
 
 		//table view.
@@ -1040,7 +957,7 @@ public class Main extends Application {
 
 				// Load JDBC Driver
 				try {
-					Class.forName("com.mysql.jdbc.Driver");
+					Class.forName("com.mysql.cj.jdbc.Driver");
 				} catch (ClassNotFoundException exp) {
 					System.out.println("Cannot find JDBC Driver");
 				}
@@ -1070,46 +987,6 @@ public class Main extends Application {
 			}
 		});
 
-		//The update button
-		updateCart.setOnAction(new EventHandler<ActionEvent>(){
-			public void handle(ActionEvent ev){
-				table.getItems().clear();
-				int qty=Integer.parseInt(qtyField.getText());
-				String isbn=isbnField.getText();
-
-				// Load JDBC Driver
-				try {
-					Class.forName("com.mysql.jdbc.Driver");
-				} catch (ClassNotFoundException exp) {
-					System.out.println("Cannot find JDBC Driver");
-				}
-				//Connect to the database
-				Connection conn = null;
-				try {
-
-					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project1","root","12345678");
-					// Do something with the Connection
-				} catch (SQLException ex) {
-					// handle any errors
-					System.out.println("SQLException: " + ex.getMessage());
-					System.out.println("SQLState: " + ex.getSQLState());
-					System.out.println("VendorError: " + ex.getErrorCode());
-				}
-
-				try {
-					String query=("UPDATE cart SET qty="+qty+" WHERE isbn = "+isbn);
-					PreparedStatement preparedSt=conn.prepareStatement(query);
-					preparedSt.execute();
-					preparedSt.close();
-					conn.close();
-				} catch (SQLException ex) {
-					System.err.println("There was an error retrieving data, system exiting.");
-					System.err.println(ex.getMessage());
-				}
-			}
-		});
-
-
 		//The show cart button
 		showCart.setOnAction(new EventHandler<ActionEvent>(){
 			public void handle(ActionEvent ev){
@@ -1117,7 +994,7 @@ public class Main extends Application {
 
 				// Load JDBC Driver
 				try {
-					Class.forName("com.mysql.jdbc.Driver");
+					Class.forName("com.mysql.cj.jdbc.Driver");
 				} catch (ClassNotFoundException exp) {
 					System.out.println("Cannot find JDBC Driver");
 				}
@@ -1166,7 +1043,9 @@ public class Main extends Application {
 		editCartStage.setScene(editCartScene);
 		editCartStage.show();
 	}
-
+	
+	//View check out Status
+	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void checkStatus(Stage stage){
 		Stage checkStage=new Stage();
@@ -1249,7 +1128,7 @@ public class Main extends Application {
 				table.getItems().clear();
 				// Load JDBC Driver
 				try {
-					Class.forName("com.mysql.jdbc.Driver");
+					Class.forName("com.mysql.cj.jdbc.Driver");
 				} catch (ClassNotFoundException ex) {
 					System.out.println("Cannot find JDBC Driver");
 				}
@@ -1265,9 +1144,10 @@ public class Main extends Application {
 					System.out.println("VendorError: " + ex.getErrorCode());
 				}
 				
-				String query=("SELECT ono, shipped, received FROM orders o WHERE o.userid='karimahmed'");
+				String query=("SELECT ono, shipped, received FROM orders o WHERE o.userid= ? ");
 				try {
 					PreparedStatement preparedSt=conn.prepareStatement(query);
+					preparedSt.setString(1, userlogged);
 					ResultSet r=preparedSt.executeQuery();
 
 					while(r.next()){
@@ -1289,7 +1169,7 @@ public class Main extends Application {
 				table2.getItems().clear();
 				// Load JDBC Driver
 				try {
-					Class.forName("com.mysql.jdbc.Driver");
+					Class.forName("com.mysql.cj.jdbc.Driver");
 				} catch (ClassNotFoundException ex) {
 					System.out.println("Cannot find JDBC Driver");
 				}
@@ -1305,9 +1185,10 @@ public class Main extends Application {
 					System.out.println("VendorError: " + ex.getErrorCode());
 				}
 				
-				String query=("SELECT fname, lname, address, city, state, zip FROM members WHERE userid='karimahmed'");
+				String query=("SELECT fname, lname, address, city, state, zip FROM members WHERE userid= ? ");
 				try {
 					PreparedStatement preparedSt=conn.prepareStatement(query);
+					preparedSt.setString(1, userlogged);
 					ResultSet r=preparedSt.executeQuery();
 
 					while(r.next()){
@@ -1338,6 +1219,8 @@ public class Main extends Application {
 		checkStage.show();
 	}
 
+	// One click check out
+	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void oneClickCheck(Stage stage){
 		Stage ocStage=new Stage();
@@ -1417,7 +1300,7 @@ public class Main extends Application {
 				table2.getItems().clear();
 				// Load JDBC Driver
 				try {
-					Class.forName("com.mysql.jdbc.Driver");
+					Class.forName("com.mysql.cj.jdbc.Driver");
 				} catch (ClassNotFoundException ex) {
 					System.out.println("Cannot find JDBC Driver");
 				}
@@ -1433,10 +1316,11 @@ public class Main extends Application {
 					System.out.println("VendorError: " + ex.getErrorCode());
 				}
 				
-				String query=("SELECT fname, lname, address, city, state, zip FROM members WHERE userid='karimahmed'");
+				String query=("SELECT fname, lname, address, city, state, zip FROM members WHERE userid= ? ");
 
 				try {
 					PreparedStatement preparedSt=conn.prepareStatement(query);
+					preparedSt.setString(1, userlogged);
 					ResultSet r=preparedSt.executeQuery();
 
 					while(r.next()){
@@ -1455,7 +1339,7 @@ public class Main extends Application {
 				
 				// Load JDBC Driver
 				try {
-					Class.forName("com.mysql.jdbc.Driver");
+					Class.forName("com.mysql.cj.jdbc.Driver");
 				} catch (ClassNotFoundException ex) {
 					System.out.println("Cannot find JDBC Driver");
 				}
@@ -1489,7 +1373,7 @@ public class Main extends Application {
 				
 				// Load JDBC Driver
 				try {
-					Class.forName("com.mysql.jdbc.Driver");
+					Class.forName("com.mysql.cj.jdbc.Driver");
 				} catch (ClassNotFoundException ex) {
 					System.out.println("Cannot find JDBC Driver");
 				}
@@ -1667,11 +1551,11 @@ public class Main extends Application {
 		private int	quantity;
 		private float price;
 
-		@SuppressWarnings("removal")
+		//@SuppressWarnings("removal")
 		private cartQuery(String isbn, String title, int quantity){
 			this.isbn=new String(isbn);
 			this.title=new String(title);
-			this.quantity=new Integer(quantity);
+			this.quantity= quantity;
 		}
 
 		public cartQuery(String isbn, String title, float price, int qty) {
@@ -1772,8 +1656,6 @@ public class Main extends Application {
 		public void setSubject(String subject) {
 			this.subject = subject;
 		}
-
-
 
 	}
 

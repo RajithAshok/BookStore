@@ -76,7 +76,7 @@ public class DatabaseHandler {
 		boolean exists=false;
 		
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
 			System.out.println("Cannot find JDBC Driver");
 		}
@@ -141,7 +141,7 @@ public class DatabaseHandler {
 
 		// Load JDBC Driver
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
 			System.out.println("Cannot find JDBC Driver");
 		}
@@ -191,7 +191,7 @@ public class DatabaseHandler {
 
 		// Load JDBC Driver
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
 			System.out.println("Cannot find JDBC Driver");
 		}
@@ -249,7 +249,7 @@ public class DatabaseHandler {
 
 		// Load JDBC Driver
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
 			System.out.println("Cannot find JDBC Driver");
 		}
@@ -312,7 +312,7 @@ public class DatabaseHandler {
 
 		// Load JDBC Driver
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
 			System.out.println("Cannot find JDBC Driver");
 		}
