@@ -5,8 +5,6 @@ import java.io.IOException;
 import java.sql.*;
 import java.util.*;
 import javafx.util.*;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.*;
 import javafx.event.*;
 import javafx.geometry.*;
@@ -31,12 +29,8 @@ public class Main extends Application {
 
 
 	String userlogged;
-	/*
-	 * 
-	 * 
-	 *This function handles the whole login
-	 * 
-	 * 
+	/*	  
+	 This function handles the whole login 
 	 */
 	@Override
 	
@@ -84,12 +78,9 @@ public class Main extends Application {
 			final Text actiontarget = new Text();
 			grid.add(actiontarget, 0, 6);
 
-			/*
-			 * 
-			 * Login Button Handler here
-			 * 
-			 * 
-			 */
+			
+			 // Login Button  
+			 
 			logBtn.setOnAction(new EventHandler<ActionEvent>() {
 
 				@Override
@@ -103,7 +94,6 @@ public class Main extends Application {
 					}
 					actiontarget.setFill(Color.FIREBRICK);
 					if(exists==true){
-						//actiontarget.setText("User successfully logged in!");
 						userTextField.clear();
 						pwBox.clear();
 						secondView(primaryStage);
@@ -114,12 +104,8 @@ public class Main extends Application {
 				}
 			});
 
-
-			/*
-			 * 
-			 * Register Button Handler here
-			 *     
-			 */
+			// Register Button
+			
 			regBtn.setOnAction(new EventHandler<ActionEvent>(){
 				public void handle(ActionEvent e){
 					startRegister(primaryStage);
@@ -134,9 +120,6 @@ public class Main extends Application {
 		}
 	}
 
-	/*
-	 * This function is responsible for the register scene.
-	 */
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void startRegister(Stage stage){
@@ -202,7 +185,6 @@ public class Main extends Application {
 		grid.add(pw, 0, 10);
 		PasswordField pwBox = new PasswordField();
 		grid.add(pwBox, 1, 10);
-
 
 
 		Label cChoice = new Label("Do you wish to enter a credit card?");
@@ -319,10 +301,8 @@ public class Main extends Application {
 		Button oneBtn=new Button("Browse by subject");
 		Button twoBtn= new Button("Search by Author/Title");
 		Button threeBtn=new Button("View/Edit shopping Cart");
-		Button fourBtn=new Button("View check out Status");
-		Button fiveBtn=new Button("Temp check out");
-		Button sixBtn=new Button("One click check out");
-		Button eightBtn=new Button("Logout");
+		Button fourBtn=new Button("Check out");
+		Button fiveBtn=new Button("Logout");
 
 
 
@@ -334,21 +314,15 @@ public class Main extends Application {
 		threeBtn.setMaxWidth(Double.MAX_VALUE);
 		fourBtn.setMaxWidth(Double.MAX_VALUE);
 		fiveBtn.setMaxWidth(Double.MAX_VALUE);
-		sixBtn.setMaxWidth(Double.MAX_VALUE);
-		eightBtn.setMaxWidth(Double.MAX_VALUE);
 
 		VBox vbButtons = new VBox();
 		vbButtons.setSpacing(10);
 		vbButtons.setPadding(new Insets(0, 20, 10, 20)); 
-		vbButtons.getChildren().addAll(oneBtn, twoBtn, threeBtn, fourBtn, sixBtn, eightBtn);
+		vbButtons.getChildren().addAll(oneBtn, twoBtn, threeBtn, fourBtn, fiveBtn);
 		grid.addColumn(1, vbButtons);
 
 
-		/*
-		 * Those are the collection of functions that handle all the eight buttons.
-		 */
-
-		//The browse by subject button
+		// Browse by subject button
 
 		oneBtn.setOnAction(new EventHandler<ActionEvent>(){
 			public void handle(ActionEvent e){
@@ -357,7 +331,7 @@ public class Main extends Application {
 			}
 		});
 
-		//The search button.
+		// Search button.
 
 		twoBtn.setOnAction(new EventHandler<ActionEvent>(){
 			public void handle(ActionEvent e){
@@ -366,7 +340,7 @@ public class Main extends Application {
 			}
 		});
 
-		//The view/edit shopping cart button.
+		// View/edit shopping cart button.
 
 		threeBtn.setOnAction(new EventHandler<ActionEvent>(){
 			public void handle(ActionEvent e){
@@ -376,36 +350,18 @@ public class Main extends Application {
 			}
 		});
 
-		//The check out status button.
-
+		// Check out
 		fourBtn.setOnAction(new EventHandler<ActionEvent>(){
 			public void handle(ActionEvent e){
-				checkStatus(secondStage);
+				checkOut(secondStage);
 				secondStage.close();
 
-			}
-		});
-		// Temp check out
-		fiveBtn.setOnAction(new EventHandler<ActionEvent>(){
-			public void handle(ActionEvent e){
-				checkStatus(secondStage);
-				secondStage.close();
-
-			}
-		});
-
-		//The one click check out button.
-
-		sixBtn.setOnAction(new EventHandler<ActionEvent>(){
-			public void handle(ActionEvent e){
-				oneClickCheck(secondStage);
-				secondStage.close();
 			}
 		});
 
 		//The logout Button
 
-		eightBtn.setOnAction(new EventHandler<ActionEvent>(){
+		fiveBtn.setOnAction(new EventHandler<ActionEvent>(){
 			public void handle(ActionEvent e){
 				secondStage.close();
 				stage.show();
@@ -417,11 +373,8 @@ public class Main extends Application {
 
 	}
 
-
-
-	/*
-	 * This function handles the browse by subject option.
-	 */
+	// Browse by Subject
+	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void browseBySubject(Stage stage){
 
@@ -434,16 +387,16 @@ public class Main extends Application {
 		grid.setHgap(10);
 		grid.setVgap(10);
 		grid.setPadding(new Insets(25, 25, 25, 25));
-		Text scenetitle = new Text("Choose the subject you'd like to browse using the drop down menu\n and then click on the browse button: ");
+		Text scenetitle = new Text("Choose the popular subject you'd like to browse using the drop down menu\n and then click on the browse button: ");
 		scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
 		grid.add(scenetitle, 0, 0, 2, 1);
 
 
 		ObservableList<String> subjects = 
 				FXCollections.observableArrayList(
-						"Comedy",
-						"Cooking",
-						"Sports",
+						"Young Adult Fiction",
+						"Mystery",
+						"Romance",
 						"Autobiography"
 						);
 		final ComboBox subjectBox = new ComboBox(subjects);
@@ -476,22 +429,15 @@ public class Main extends Application {
 		Text addedToCart=new Text();
 		grid.add(addedToCart, 1, 6);
 
-
-
-
-
 		//the tableview
 		TableView table = new TableView();
 		table.setEditable(true);
-
-
 
 		TableColumn<rowQuery, String> isbnCol = new TableColumn("ISBN");
 		TableColumn<rowQuery, String> authorCol = new TableColumn("Author");
 		TableColumn<rowQuery, String> titleCol = new TableColumn("Title");
 		TableColumn<rowQuery, String> priceCol = new TableColumn("Price");
 		TableColumn<rowQuery, String> subjectCol = new TableColumn("Subject");
-
 
 
 		final VBox vbox = new VBox();
@@ -506,52 +452,23 @@ public class Main extends Application {
 		subjectCol.setCellValueFactory(new PropertyValueFactory<rowQuery, String>("subject"));
 		table.getColumns().addAll(isbnCol, authorCol, titleCol, priceCol, subjectCol);
 
-		/*
-		 *temp fix, resort to if all fails.
-		 * 
-  		final ListView<String> isbnView = new ListView();
-		final ListView<String> authorView = new ListView();
-		final ListView<String> titleView = new ListView();
-		final ListView<String> priceView = new ListView();
-	    final ListView<String> subjectView = new ListView();
-	    final VBox vbox=new VBox();
-		vbox.setSpacing(5);
-		vbox.setAlignment(Pos.CENTER);
-		vbox.setPadding(new Insets(10, 0, 0, 10));
-		vbox.getChildren().addAll(isbnView, authorView, titleView, priceView, subjectView);
-		grid.add(vbox, 0, 5);
-		 */
-
-
-
-
 		browse.setOnAction(new EventHandler<ActionEvent>(){
 			public void handle(ActionEvent e){
 				String subjectChoice=subjectBox.getValue().toString();
 				table.getItems().clear();
-				/*			
-				 * 
-				 * temp fix, resort to if all fails
-  				ObservableList<String> isbns = FXCollections.observableArrayList();
-				ObservableList<String> authors = FXCollections.observableArrayList();
-				ObservableList<String> titles = FXCollections.observableArrayList();
-				ObservableList<String> prices = FXCollections.observableArrayList();
-			    ObservableList<String> subjects = FXCollections.observableArrayList();*/
-
-				// Load JDBC Driver
+				
 				try {
 					Class.forName("com.mysql.cj.jdbc.Driver");
 				} catch (ClassNotFoundException exp) {
 					System.out.println("Cannot find JDBC Driver");
 				}
-				//Connect to the database
+				
 				Connection conn = null;
 				try {
 
 					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project1","root","12345678");
-					// Do something with the Connection
+					
 				} catch (SQLException ex) {
-					// handle any errors
 					System.out.println("SQLException: " + ex.getMessage());
 					System.out.println("SQLState: " + ex.getSQLState());
 					System.out.println("VendorError: " + ex.getErrorCode());
@@ -576,34 +493,6 @@ public class Main extends Application {
 					System.exit(0);	
 				}
 
-
-				/*	
-				 * 
-				 * 
-				 * Temp Fix, resort to if all fails			
-				try{
-					PreparedStatement st=conn.prepareStatement(query);
-					ResultSet rs = st.executeQuery();
-					 while (rs.next()) {
-					      isbns.add(rs.getString("isbn"));
-					      authors.add(rs.getString("author"));
-					      titles.add(rs.getString("title"));
-					      prices.add(rs.getString("price"));
-					      subjects.add(rs.getString("subject"));
-					    }
-
-				}
-				catch (SQLException ex) {
-					System.err.println("There was an error retrieving data, system exiting.");
-					System.err.println(ex.getMessage());
-					System.exit(0);	
-				}
-				isbnView.setItems(isbns);
-				authorView.setItems(authors);
-				titleView.setItems(titles);
-				priceView.setItems(prices);
-				subjectView.setItems(subjects);
-				 */
 			}
 		});
 
@@ -619,20 +508,18 @@ public class Main extends Application {
 				String isbn = isbnSlot.getText();
 				int qty = Integer.parseInt(quantity.getText());
 
-				// Load JDBC Driver
 				try {
 					Class.forName("com.mysql.cj.jdbc.Driver");
 				} catch (ClassNotFoundException exp) {
 					System.out.println("Cannot find JDBC Driver");
 				}
-				//Connect to the database
+				
 				Connection conn = null;
 				try {
 
 					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project1","root","12345678");
-					// Do something with the Connection
+					
 				} catch (SQLException ex) {
-					// handle any errors
 					System.out.println("SQLException: " + ex.getMessage());
 					System.out.println("SQLState: " + ex.getSQLState());
 					System.out.println("VendorError: " + ex.getErrorCode());
@@ -656,8 +543,6 @@ public class Main extends Application {
 					System.err.println("There was an error retrieving data, system exiting.");
 					System.out.println(ex.getMessage());
 				}
-
-
 			}
 
 		});
@@ -667,9 +552,7 @@ public class Main extends Application {
 
 	}
 
-	/*
-	 * this function handles the search by author/title option.
-	 */
+	// Search by author/title
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void searchBy(Stage stage){
@@ -699,8 +582,6 @@ public class Main extends Application {
 		hbBtn.getChildren().add(searchAuthor);
 		Button searchTitle=new Button("Search by Title");
 		hbBtn.getChildren().add(searchTitle);
-
-
 
 
 		Text isbnNotification=new Text("Enter the ISBN number here \n"
@@ -748,20 +629,18 @@ public class Main extends Application {
 				String authorName=author.getText().toString();
 				table.getItems().clear();
 
-				// Load JDBC Driver
 				try {
 					Class.forName("com.mysql.cj.jdbc.Driver");
 				} catch (ClassNotFoundException exp) {
 					System.out.println("Cannot find JDBC Driver");
 				}
-				//Connect to the database
+				
 				Connection conn = null;
 				try {
 
 					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project1","root","12345678");
-					// Do something with the Connection
+					
 				} catch (SQLException ex) {
-					// handle any errors
 					System.out.println("SQLException: " + ex.getMessage());
 					System.out.println("SQLState: " + ex.getSQLState());
 					System.out.println("VendorError: " + ex.getErrorCode());
@@ -795,20 +674,18 @@ public class Main extends Application {
 				String titleName=author.getText().toString();
 				table.getItems().clear();
 
-				// Load JDBC Driver
 				try {
 					Class.forName("com.mysql.cj.jdbc.Driver");
 				} catch (ClassNotFoundException exp) {
 					System.out.println("Cannot find JDBC Driver");
 				}
-				//Connect to the database
+				
 				Connection conn = null;
 				try {
 
 					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project1","root","12345678");
-					// Do something with the Connection
+					
 				} catch (SQLException ex) {
-					// handle any errors
 					System.out.println("SQLException: " + ex.getMessage());
 					System.out.println("SQLState: " + ex.getSQLState());
 					System.out.println("VendorError: " + ex.getErrorCode());
@@ -843,21 +720,20 @@ public class Main extends Application {
 				String isbn = isbnSlot.getText();
 				int qty=Integer.parseInt(quantity.getText());
 
-				// Load JDBC Driver
+
 				try {
 					Class.forName("com.mysql.cj.jdbc.Driver");
 				} catch (ClassNotFoundException exp) {
 					System.out.println("Cannot find JDBC Driver");
 				}
-				//Connect to the database
+
 				Connection conn = null;
 				try {
 
 					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project1","root","12345678");
-					// Do something with the Connection
+					
 				} catch (SQLException ex) {
-					// handle any errors
-					System.out.println("SQLException: " + ex.getMessage());
+					System.err.println("SQLException: " + ex.getMessage());
 					System.out.println("SQLState: " + ex.getSQLState());
 					System.out.println("VendorError: " + ex.getErrorCode());
 				}
@@ -937,7 +813,7 @@ public class Main extends Application {
 		grid.add(hbBtn, 0, 5);
 
 		//table view.
-		//the tableview
+		
 		TableView table = new TableView();
 		table.setEditable(true);
 
@@ -961,20 +837,18 @@ public class Main extends Application {
 				table.getItems().clear();
 				String isbn=isbnField.getText();
 
-				// Load JDBC Driver
 				try {
 					Class.forName("com.mysql.cj.jdbc.Driver");
 				} catch (ClassNotFoundException exp) {
 					System.out.println("Cannot find JDBC Driver");
 				}
-				//Connect to the database
+				
 				Connection conn = null;
 				try {
 
 					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project1","root","12345678");
-					// Do something with the Connection
+					
 				} catch (SQLException ex) {
-					// handle any errors
 					System.out.println("SQLException: " + ex.getMessage());
 					System.out.println("SQLState: " + ex.getSQLState());
 					System.out.println("VendorError: " + ex.getErrorCode());
@@ -998,20 +872,18 @@ public class Main extends Application {
 			public void handle(ActionEvent ev){
 				table.getItems().clear();
 
-				// Load JDBC Driver
 				try {
 					Class.forName("com.mysql.cj.jdbc.Driver");
 				} catch (ClassNotFoundException exp) {
 					System.out.println("Cannot find JDBC Driver");
 				}
-				//Connect to the database
+				
 				Connection conn = null;
 				try {
 
 					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project1","root","12345678");
-					// Do something with the Connection
+					
 				} catch (SQLException ex) {
-					// handle any errors
 					System.out.println("SQLException: " + ex.getMessage());
 					System.out.println("SQLState: " + ex.getSQLState());
 					System.out.println("VendorError: " + ex.getErrorCode());
@@ -1051,514 +923,139 @@ public class Main extends Application {
 		editCartStage.show();
 	}
 	
-	//View check out Status
+	// Check out
 	
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public void checkStatus(Stage stage){
-		Stage checkStage=new Stage();
-		checkStage.setTitle("Check Status");
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public void checkOut(Stage stage){
+		Stage checkOutStage=new Stage();
+		checkOutStage.setTitle("Check Out");
 		GridPane grid = new GridPane();
-		Scene checkScene=new Scene(grid, 800, 800);
-		checkScene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-		grid.setAlignment(Pos.CENTER);
+		Scene checkOutScene=new Scene(grid, 800, 800);
+		checkOutScene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+		grid.setAlignment(Pos.TOP_LEFT);
 		grid.setHgap(10);
 		grid.setVgap(10);
 		grid.setPadding(new Insets(25, 25, 25, 25));
-		Text scenetitle = new Text("Press on orders orders to display your orders or Type in\n"
-				+ " an order number and press get details to get its details:");
+		Text scenetitle = new Text("Press on the show cart Button to show your current cart content\n"
+				+ "or enter the ISBN of the book and press delete to remove the entry\n"
+				+ "or enter the ISBN & The new quantity of the book & press update \n"
+				+ "to edit your cart's quantity:");
 		scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
-		grid.add(scenetitle, 0, 0, 3, 1);
+		grid.add(scenetitle, 0, 0, 2, 1);
 
-		Text enterOno=new Text("Enter the order number here:");
-		grid.add(enterOno, 1, 1);
-		TextField onoField=new TextField();
-		grid.add(onoField, 1, 2);
-
-		Button getOrders=new Button("View Orders");
+		Button showCart=new Button("View Cart");
+		Button checkOut=new Button("Check out");
 		Button back=new Button("Back");
-		Button getDetails=new Button("Get details");
 		HBox hbBtn = new HBox(10);
 		hbBtn.setAlignment(Pos.BOTTOM_LEFT);
-		hbBtn.getChildren().addAll(back, getOrders, getDetails);
-		grid.add(hbBtn, 0, 2);
-
+		hbBtn.getChildren().addAll(back, showCart, checkOut);
+		grid.add(hbBtn, 0, 5);
+		
+		Text checkedOut=new Text();
+		grid.add(checkedOut, 1, 6);
+		
 		//table view.
-		//the tableview on the left.
+		
 		TableView table = new TableView();
 		table.setEditable(true);
 
-		TableColumn<orderDetails, Integer> onoCol = new TableColumn("Order Number");
-		TableColumn<orderDetails, String> shippCol = new TableColumn("Shipped");
-		TableColumn<orderDetails, String> reciCol = new TableColumn("Received");
-
-		final VBox vbox = new VBox();
-		vbox.setSpacing(5);
-		vbox.setPadding(new Insets(10, 0, 0, 10));
-		vbox.getChildren().addAll(table);
-		grid.add(vbox, 0, 4);
-		onoCol.setCellValueFactory(new PropertyValueFactory<orderDetails, Integer>("ono"));
-		shippCol.setCellValueFactory(new PropertyValueFactory<orderDetails, String>("shipped"));
-		reciCol.setCellValueFactory(new PropertyValueFactory<orderDetails, String>("received"));
-		table.getColumns().addAll(onoCol, shippCol, reciCol);
-
-
-		//the table view on the right
-		TableView table2=new TableView();
-		table2.setEditable(true);
-
-		TableColumn<orderDetails, String> fnameCol = new TableColumn("First Name");
-		TableColumn<orderDetails, String> lnameCol = new TableColumn("Last Name");
-		TableColumn<orderDetails, String> addCol = new TableColumn("Address");
-		TableColumn<orderDetails, String> cityCol = new TableColumn("City");
-		TableColumn<orderDetails, String> stateCol = new TableColumn("State");
-		TableColumn<orderDetails, String> zipCol = new TableColumn("Zip");
-
-		final VBox vbox2 = new VBox();
-		vbox2.setSpacing(5);
-		vbox2.setPadding(new Insets(10, 0, 0, 10));
-		vbox2.setAlignment(Pos.TOP_RIGHT);
-		vbox2.getChildren().addAll(table2);
-		grid.add(vbox2, 2, 4);
-
-		fnameCol.setCellValueFactory(new PropertyValueFactory<orderDetails, String>("fname"));
-		lnameCol.setCellValueFactory(new PropertyValueFactory<orderDetails, String>("lname"));
-		addCol.setCellValueFactory(new PropertyValueFactory<orderDetails, String>("address"));
-		cityCol.setCellValueFactory(new PropertyValueFactory<orderDetails, String>("city"));
-		stateCol.setCellValueFactory(new PropertyValueFactory<orderDetails, String>("state"));
-		zipCol.setCellValueFactory(new PropertyValueFactory<orderDetails, String>("zip"));
-
-		table2.getColumns().addAll(fnameCol, lnameCol, addCol, cityCol, stateCol, zipCol);
-
-
-		getOrders.setOnAction(new EventHandler<ActionEvent>(){
-			public void handle(ActionEvent e){
-				table.getItems().clear();
-				// Load JDBC Driver
-				try {
-					Class.forName("com.mysql.cj.jdbc.Driver");
-				} catch (ClassNotFoundException ex) {
-					System.out.println("Cannot find JDBC Driver");
-				}
-				//Connect to the database
-				Connection conn = null;
-				try {
-					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project1","root","12345678");
-					// Do something with the Connection
-				} catch (SQLException ex) {
-					// handle any errors
-					System.out.println("SQLException: " + ex.getMessage());
-					System.out.println("SQLState: " + ex.getSQLState());
-					System.out.println("VendorError: " + ex.getErrorCode());
-				}
-				
-				String query=("SELECT ono, shipped, received FROM orders o WHERE o.userid= ?");
-				try {
-					PreparedStatement preparedSt=conn.prepareStatement(query);
-					preparedSt.setString(1, userlogged);
-					ResultSet r=preparedSt.executeQuery();
-
-					while(r.next()){
-						ObservableList<String> data=FXCollections.observableArrayList();
-						orderDetails rowdata=new orderDetails(r.getInt("ono"), r.getString("shipped"), r.getString("received"));	
-						table.getItems().addAll(rowdata);
-					}
-					preparedSt.close();
-					conn.close();
-				} catch (SQLException ex) {
-					System.err.println("There was an error retrieving data, system exiting.");
-					System.err.println(ex.getMessage());
-				}
-			}
-		});
-		
-		getDetails.setOnAction(new EventHandler<ActionEvent>(){
-			public void handle(ActionEvent e){
-				table2.getItems().clear();
-				// Load JDBC Driver
-				try {
-					Class.forName("com.mysql.cj.jdbc.Driver");
-				} catch (ClassNotFoundException ex) {
-					System.out.println("Cannot find JDBC Driver");
-				}
-				//Connect to the database
-				Connection conn = null;
-				try {
-					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project1","root","12345678");
-					// Do something with the Connection
-				} catch (SQLException ex) {
-					// handle any errors
-					System.out.println("SQLException: " + ex.getMessage());
-					System.out.println("SQLState: " + ex.getSQLState());
-					System.out.println("VendorError: " + ex.getErrorCode());
-				}
-				
-				String query=("SELECT fname, lname, address, city, state, zip FROM members WHERE userid= ?");
-				try {
-					PreparedStatement preparedSt=conn.prepareStatement(query);
-					preparedSt.setString(1, userlogged);
-					ResultSet r=preparedSt.executeQuery();
-
-					while(r.next()){
-						ObservableList<String> data=FXCollections.observableArrayList();
-						orderDetails rowdata=new orderDetails(r.getString("fname"), r.getString("lname"),r.getString("address"),r.getString("city"),
-								r.getString("state"),r.getString("zip"));
-						table2.getItems().addAll(rowdata);
-					}
-					preparedSt.close();
-					conn.close();
-				} catch (SQLException ex) {
-					System.err.println("There was an error retrieving data, system exiting.");
-					System.err.println(ex.getMessage());
-				}
-			}
-		});
-
-
-		//Back button.
-		back.setOnAction(new EventHandler<ActionEvent>(){
-			public void handle(ActionEvent e){
-				stage.show();
-				checkStage.close();
-			}
-		});
-
-		checkStage.setScene(checkScene);
-		checkStage.show();
-	}
-
-	// One click check out
-	
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public void oneClickCheck(Stage stage){
-		Stage ocStage=new Stage();
-		ocStage.setTitle("One Click Checkout");
-		GridPane grid = new GridPane();
-		Scene checkScene=new Scene(grid, 800, 800);
-		checkScene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-		grid.setAlignment(Pos.CENTER);
-		grid.setHgap(10);
-		grid.setVgap(10);
-		grid.setPadding(new Insets(25, 25, 25, 25));
-		Text scenetitle = new Text("Congratulations on your purchase!");
-		scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
-		grid.add(scenetitle, 0, 0, 3, 1);
-		
-		Button oneClick=new Button("One Click Checkout");
-		Button back=new Button("Back");
-		HBox hbBtn = new HBox(10);
-		hbBtn.setAlignment(Pos.BOTTOM_LEFT);
-		hbBtn.getChildren().addAll(oneClick, back);
-		grid.add(hbBtn, 0, 1);
-		
-		Text gratz=new Text();
-		grid.add(gratz, 0, 2);
-		Text totalText=new Text();
-		grid.add(totalText, 0, 3);
-		
-		TableView table=new TableView();
-		table.setEditable(true);
-		
 		TableColumn<cartQuery, String> isbnCol = new TableColumn("ISBN");
 		TableColumn<cartQuery, String> titleCol = new TableColumn("Title");
 		TableColumn<cartQuery, Integer> qtyCol = new TableColumn("Quantity");
-		TableColumn<cartQuery, Float> priceCol=new TableColumn("Price");
 
 		final VBox vbox = new VBox();
 		vbox.setSpacing(5);
 		vbox.setPadding(new Insets(10, 0, 0, 10));
 		vbox.getChildren().addAll(table);
-		grid.add(vbox, 0, 4);
+		grid.add(vbox, 0, 6);
 		isbnCol.setCellValueFactory(new PropertyValueFactory<cartQuery, String>("isbn"));
 		titleCol.setCellValueFactory(new PropertyValueFactory<cartQuery, String>("Title"));
 		qtyCol.setCellValueFactory(new PropertyValueFactory<cartQuery, Integer>("Quantity"));
-		priceCol.setCellValueFactory(new PropertyValueFactory<cartQuery, Float>("Price"));
-		table.getColumns().addAll(isbnCol, titleCol, qtyCol, priceCol);
-		
+		table.getColumns().addAll(isbnCol, titleCol, qtyCol);
 
-		//the table view on the right
-		TableView table2=new TableView();
-		table2.setEditable(true);
+		//The show cart button
+		showCart.setOnAction(new EventHandler<ActionEvent>(){
+			public void handle(ActionEvent ev){
+				table.getItems().clear();
 
-		TableColumn<orderDetails, String> fnameCol = new TableColumn("First Name");
-		TableColumn<orderDetails, String> lnameCol = new TableColumn("Last Name");
-		TableColumn<orderDetails, String> addCol = new TableColumn("Address");
-		TableColumn<orderDetails, String> cityCol = new TableColumn("City");
-		TableColumn<orderDetails, String> stateCol = new TableColumn("State");
-		TableColumn<orderDetails, String> zipCol = new TableColumn("Zip");
+						try {
+							Class.forName("com.mysql.cj.jdbc.Driver");
+						} catch (ClassNotFoundException exp) {
+							System.out.println("Cannot find JDBC Driver");
+						}
+						
+						Connection conn = null;
+						try {
 
-		final VBox vbox2 = new VBox();
-		vbox2.setSpacing(5);
-		vbox2.setPadding(new Insets(10, 0, 0, 10));
-		vbox2.setAlignment(Pos.TOP_RIGHT);
-		vbox2.getChildren().addAll(table2);
-		grid.add(vbox2, 2, 4);
+							conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project1","root","12345678");
+							
+						} catch (SQLException ex) {
+							System.out.println("SQLException: " + ex.getMessage());
+							System.out.println("SQLState: " + ex.getSQLState());
+							System.out.println("VendorError: " + ex.getErrorCode());
+						}
 
-		fnameCol.setCellValueFactory(new PropertyValueFactory<orderDetails, String>("fname"));
-		lnameCol.setCellValueFactory(new PropertyValueFactory<orderDetails, String>("lname"));
-		addCol.setCellValueFactory(new PropertyValueFactory<orderDetails, String>("address"));
-		cityCol.setCellValueFactory(new PropertyValueFactory<orderDetails, String>("city"));
-		stateCol.setCellValueFactory(new PropertyValueFactory<orderDetails, String>("state"));
-		zipCol.setCellValueFactory(new PropertyValueFactory<orderDetails, String>("zip"));
 
-		table2.getColumns().addAll(fnameCol, lnameCol, addCol, cityCol, stateCol, zipCol);
-		
-		oneClick.setOnAction(new EventHandler<ActionEvent>(){
+
+						try {
+							String query=("SELECT books.isbn, title, c.qty FROM cart c, books WHERE books.isbn=c.isbn and c.userid=?;");
+							PreparedStatement preparedSt=conn.prepareStatement(query);
+							preparedSt.setString(1, userlogged);
+							ResultSet r=preparedSt.executeQuery();
+
+							while(r.next()){
+								ObservableList<String> data=FXCollections.observableArrayList();
+								cartQuery rowdata=new cartQuery(r.getString("isbn"), r.getString("title"), r.getInt("qty"));	
+								table.getItems().addAll(rowdata);
+							}
+							preparedSt.close();
+							conn.close();
+						} catch (SQLException ex) {
+							System.err.println("There was an error retrieving data, system exiting.");
+							System.err.println(ex.getMessage());
+						}
+					}
+				});
+
+	// Check Out button
+		checkOut.setOnAction(new EventHandler<ActionEvent>(){
 			public void handle(ActionEvent e){
-				table2.getItems().clear();
-				// Load JDBC Driver
-				try {
-					Class.forName("com.mysql.cj.jdbc.Driver");
-				} catch (ClassNotFoundException ex) {
-					System.out.println("Cannot find JDBC Driver");
-				}
-				//Connect to the database
-				Connection conn = null;
-				try {
-					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project1","root","12345678");
-					// Do something with the Connection
-				} catch (SQLException ex) {
-					// handle any errors
-					System.out.println("SQLException: " + ex.getMessage());
-					System.out.println("SQLState: " + ex.getSQLState());
-					System.out.println("VendorError: " + ex.getErrorCode());
-				}
-				
-				String query=("SELECT fname, lname, address, city, state, zip FROM members WHERE userid=?");
 
-				try {
-					PreparedStatement preparedSt=conn.prepareStatement(query);
-					preparedSt.setString(1, userlogged);
-					ResultSet r=preparedSt.executeQuery();
+				try{
+					
+					checkedOut.setText("Check Out successfully!");
+										
+				}catch (Exception ex) {
+					
+					System.err.println("There was an error retrieving data, system exiting.");
+					
+				}
 
-					while(r.next()){
-						ObservableList<String> data=FXCollections.observableArrayList();
-						orderDetails rowdata=new orderDetails(r.getString("fname"), r.getString("lname"),r.getString("address"),r.getString("city"),
-								r.getString("state"),r.getString("zip"));
-						table2.getItems().addAll(rowdata);
-					}
-					preparedSt.close();
-					conn.close();
-				} catch (SQLException ex) {
-					System.err.println("There was an error retrieving data, system exiting.");
-					System.err.println(ex.getMessage());
-				}
-				
-				
-				// Load JDBC Driver
-				try {
-					Class.forName("com.mysql.cj.jdbc.Driver");
-				} catch (ClassNotFoundException ex) {
-					System.out.println("Cannot find JDBC Driver");
-				}
-				//Connect to the database
-				Connection conn2 = null;
-				try {
-					conn2 = DriverManager.getConnection("jdbc:mysql://localhost:3306/project1","root","12345678");
-					// Do something with the Connection
-				} catch (SQLException ex) {
-					// handle any errors
-					System.out.println("SQLException: " + ex.getMessage());
-					System.out.println("SQLState: " + ex.getSQLState());
-					System.out.println("VendorError: " + ex.getErrorCode());
-				}
-				String query2=("SELECT books.isbn, title, o.price, o.qty FROM odetails o, books WHERE books.isbn=o.isbn");
-				try {
-					PreparedStatement preparedStat=conn2.prepareStatement(query2);
-					ResultSet rs=preparedStat.executeQuery();
 
-					while(rs.next()){
-						ObservableList<String> data=FXCollections.observableArrayList();
-						cartQuery rowdata=new cartQuery(rs.getString("isbn"), rs.getString("title"), rs.getFloat("price"), rs.getInt("qty"));
-						table.getItems().addAll(rowdata);
-					}
-					preparedStat.close();
-					conn2.close();
-				} catch (SQLException ex) {
-					System.err.println("There was an error retrieving data, system exiting.");
-					System.err.println(ex.getMessage());
-				}
-				
-				// Load JDBC Driver
-				try {
-					Class.forName("com.mysql.cj.jdbc.Driver");
-				} catch (ClassNotFoundException ex) {
-					System.out.println("Cannot find JDBC Driver");
-				}
-				//Connect to the database
-				Connection conn3 = null;
-				try {
-					conn3 = DriverManager.getConnection("jdbc:mysql://localhost:3306/project1","root","12345678");
-					// Do something with the Connection
-				} catch (SQLException ex) {
-					// handle any errors
-					System.out.println("SQLException: " + ex.getMessage());
-					System.out.println("SQLState: " + ex.getSQLState());
-					System.out.println("VendorError: " + ex.getErrorCode());
-				}
-				String query3=("SELECT price FROM odetails");
-				try {
-					PreparedStatement preparedStat2=conn3.prepareStatement(query2);
-					ResultSet rs1=preparedStat2.executeQuery();
-					float total=0;
-					while(rs1.next()){
-						total+=rs1.getFloat("price");
-					}
-					String totalMoney="The total amount due is: "+total+"$";
-					totalText.setText(totalMoney);
-					preparedStat2.close();
-					conn3.close();
-				} catch (SQLException ex) {
-					System.err.println("There was an error retrieving data, system exiting.");
-					System.err.println(ex.getMessage());
-				}
-				
 			}
+
 		});
-		
-		
-		//Back button.
-		back.setOnAction(new EventHandler<ActionEvent>(){
-			public void handle(ActionEvent e){
-				stage.show();
-				ocStage.close();
-			}
-		});
-		ocStage.setScene(checkScene);
-		ocStage.show();
-	}
-	public class orderDetails{
-		private Integer ono;
-		private String received;
-		private String shipped;
-		private String fname;
-		private String lname;
-		private String address;
-		private String city;
-		private String state;
-		private Integer shipZip;
-		private String zip;
+	//Back button.
+			back.setOnAction(new EventHandler<ActionEvent>(){
+				public void handle(ActionEvent e){
+					stage.show();
+					checkOutStage.close();
+				}
+			});
 
-		public orderDetails(Integer ono, String recieved, String shipped,
-				String fname, String lname, String address, String city,
-				String state, Integer shipZip, String zip) {
-			this.ono = ono;
-			this.received = recieved;
-			this.shipped = shipped;
-			this.fname = fname;
-			this.lname = lname;
-			this.address = address;
-			this.city = city;
-			this.state = state;
-			this.shipZip = shipZip;
-			this.zip = zip;
+			checkOutStage.setScene(checkOutScene);
+			checkOutStage.show();
 		}
-
-		public orderDetails(Integer ono, String shipped, String received) {
-			this.ono = ono;
-			this.shipped = shipped;
-			this.received = received;
-		}
-
-		public orderDetails(String fname, String lname, String address,
-				String city, String state, String zip) {
-			super();
-			this.fname = fname;
-			this.lname = lname;
-			this.address = address;
-			this.city = city;
-			this.state = state;
-			this.zip = zip;
-		}
-
-		public Integer getOno() {
-			return ono;
-		}
-
-		public void setOno(Integer ono) {
-			this.ono = ono;
-		}
-
-		public String getReceived() {
-			return received;
-		}
-
-		public void setReceived(String received) {
-			this.received = received;
-		}
-
-		public String getShipped() {
-			return shipped;
-		}
-
-		public void setShipped(String shipped) {
-			this.shipped = shipped;
-		}
-
-		public String getFname() {
-			return fname;
-		}
-
-		public void setFname(String fname) {
-			this.fname = fname;
-		}
-
-		public String getLname() {
-			return lname;
-		}
-
-		public void setLname(String lname) {
-			this.lname = lname;
-		}
-
-		public String getAddress() {
-			return address;
-		}
-
-		public void setAddress(String address) {
-			this.address = address;
-		}
-
-		public String getCity() {
-			return city;
-		}
-
-		public void setCity(String city) {
-			this.city = city;
-		}
-
-		public String getState() {
-			return state;
-		}
-
-		public void setState(String state) {
-			this.state = state;
-		}
-
-		public Integer getShipZip() {
-			return shipZip;
-		}
-
-		public void setShipZip(Integer shipZip) {
-			this.shipZip = shipZip;
-		}
-
-		public String getZip() {
-			return zip;
-		}
-
-		public void setZip(String zip) {
-			this.zip = zip;
-		}
-
-	}
-
+	
+	
+	// Getters and Setters
+	
 	public class cartQuery{
 		private String isbn;
 		private String title;
 		private int	quantity;
 		private float price;
 
-		//@SuppressWarnings("removal")
 		private cartQuery(String isbn, String title, int quantity){
 			this.isbn=new String(isbn);
 			this.title=new String(title);
@@ -1667,5 +1164,3 @@ public class Main extends Application {
 	}
 
 }
-
-
