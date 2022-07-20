@@ -25,10 +25,6 @@ import javafx.scene.text.*;
 public class Main extends Application {
 	DatabaseHandler dbmanager=new DatabaseHandler();
 
-	/*
-	 * main function
-	 * 
-	 */
 	public static void main(String[] args) {
 		launch(args);
 	}
@@ -324,6 +320,7 @@ public class Main extends Application {
 		Button twoBtn= new Button("Search by Author/Title");
 		Button threeBtn=new Button("View/Edit shopping Cart");
 		Button fourBtn=new Button("View check out Status");
+		Button fiveBtn=new Button("Temp check out");
 		Button sixBtn=new Button("One click check out");
 		Button eightBtn=new Button("Logout");
 
@@ -336,6 +333,7 @@ public class Main extends Application {
 		twoBtn.setMaxWidth(Double.MAX_VALUE);
 		threeBtn.setMaxWidth(Double.MAX_VALUE);
 		fourBtn.setMaxWidth(Double.MAX_VALUE);
+		fiveBtn.setMaxWidth(Double.MAX_VALUE);
 		sixBtn.setMaxWidth(Double.MAX_VALUE);
 		eightBtn.setMaxWidth(Double.MAX_VALUE);
 
@@ -381,6 +379,14 @@ public class Main extends Application {
 		//The check out status button.
 
 		fourBtn.setOnAction(new EventHandler<ActionEvent>(){
+			public void handle(ActionEvent e){
+				checkStatus(secondStage);
+				secondStage.close();
+
+			}
+		});
+		// Temp check out
+		fiveBtn.setOnAction(new EventHandler<ActionEvent>(){
 			public void handle(ActionEvent e){
 				checkStatus(secondStage);
 				secondStage.close();
@@ -1014,8 +1020,9 @@ public class Main extends Application {
 
 
 				try {
-					String query=("SELECT books.isbn, title, c.qty FROM cart c, books WHERE books.isbn=c.isbn;");
+					String query=("SELECT books.isbn, title, c.qty FROM cart c, books WHERE books.isbn=c.isbn and c.userid=?;");
 					PreparedStatement preparedSt=conn.prepareStatement(query);
+					preparedSt.setString(1, userlogged);
 					ResultSet r=preparedSt.executeQuery();
 
 					while(r.next()){
@@ -1144,7 +1151,7 @@ public class Main extends Application {
 					System.out.println("VendorError: " + ex.getErrorCode());
 				}
 				
-				String query=("SELECT ono, shipped, received FROM orders o WHERE o.userid= ? ");
+				String query=("SELECT ono, shipped, received FROM orders o WHERE o.userid= ?");
 				try {
 					PreparedStatement preparedSt=conn.prepareStatement(query);
 					preparedSt.setString(1, userlogged);
@@ -1185,7 +1192,7 @@ public class Main extends Application {
 					System.out.println("VendorError: " + ex.getErrorCode());
 				}
 				
-				String query=("SELECT fname, lname, address, city, state, zip FROM members WHERE userid= ? ");
+				String query=("SELECT fname, lname, address, city, state, zip FROM members WHERE userid= ?");
 				try {
 					PreparedStatement preparedSt=conn.prepareStatement(query);
 					preparedSt.setString(1, userlogged);
@@ -1316,7 +1323,7 @@ public class Main extends Application {
 					System.out.println("VendorError: " + ex.getErrorCode());
 				}
 				
-				String query=("SELECT fname, lname, address, city, state, zip FROM members WHERE userid= ? ");
+				String query=("SELECT fname, lname, address, city, state, zip FROM members WHERE userid=?");
 
 				try {
 					PreparedStatement preparedSt=conn.prepareStatement(query);
