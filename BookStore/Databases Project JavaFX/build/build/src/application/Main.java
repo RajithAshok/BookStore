@@ -543,6 +543,7 @@ public class Main extends Application {
 					System.err.println("There was an error retrieving data, system exiting.");
 					System.out.println(ex.getMessage());
 				}
+				
 			}
 
 		});
