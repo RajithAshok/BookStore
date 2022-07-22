@@ -79,3 +79,13 @@ insert into books values(1027, "Amor Towles", "A Gentleman in Moscow", 1861.00, 
 insert into books values(1028, "Amor Towles", "The Book of Lost Names", 1105.00, "Historical fiction");
 insert into books values(1029, "Kristin Harmel", "The Forest of Vanishing Stars", 1658.00, "War");
 insert into books values(1030, "Kristin Harmel", "The Life Intended", 847.00, "Fiction");
+insert into books values(1031,"Bret Easton Ellis","Lunar Park",380.00,"Fiction");
+insert into books values(1032,"Ray Bradbury","Fahrenheit 451",290.00,"Classics");
+insert into books values(1033,"Chuck Palahniuk","Invisible Monsters",340.00,"Fiction");
+insert into books values(1034,"Irvine Welsh","Skagboys",260.00,"Thriller");
+insert into books values(1035,"Anthony burgess","A clockwork orange",300.00,"Science Fiction");
+insert into books values(1036,"	Irvine welsh","trainspotting",320.00,"Fiction");
+insert into books values(1037,"Iain Banks","The wasp factory",340.00,"Horror");
+insert into books values(1038,"R.D Ronald","The Elephant tree",280.00,"Fiction");
+insert into books values(1039,"Chuvk Palakniuk","Fight Club",360.00,"Classics");
+insert into books values(1040,"Bret Easton Ellis","American Psycho",290.00,"Fiction");
