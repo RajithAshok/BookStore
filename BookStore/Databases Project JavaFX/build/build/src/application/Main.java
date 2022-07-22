@@ -38,7 +38,7 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		
 		try {
-			primaryStage.setTitle("Online Bookstore Application");
+			primaryStage.setTitle("Book Store Management System");
 			GridPane grid = new GridPane();
 			Scene scene = new Scene(grid, 800, 640);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
@@ -124,7 +124,7 @@ public class Main extends Application {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void startRegister(Stage stage){
 		Stage regStage = new Stage();
-		regStage.setTitle("Book Store");
+		regStage.setTitle("Book Store Management System");
 		GridPane grid = new GridPane();
 		Scene regScene=new Scene(grid, 800, 640);
 		regScene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
@@ -300,7 +300,7 @@ public class Main extends Application {
 
 		Button oneBtn=new Button("Browse by subject");
 		Button twoBtn= new Button("Search by Author/Title");
-		Button threeBtn=new Button("View/Edit shopping Cart");
+		Button threeBtn=new Button("View/Edit Cart");
 		Button fourBtn=new Button("Check out");
 		Button fiveBtn=new Button("Logout");
 
@@ -379,7 +379,7 @@ public class Main extends Application {
 	public void browseBySubject(Stage stage){
 
 		Stage browseStage = new Stage();
-		browseStage.setTitle("Browse by subject");
+		browseStage.setTitle("Browse by Subject");
 		GridPane grid = new GridPane();
 		Scene browseScene=new Scene(grid, 800, 800);
 		browseScene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
@@ -775,12 +775,12 @@ public class Main extends Application {
 		searchStage.show();
 	}
 	
-	// View/Edit shopping Cart
+	// View/Edit Cart
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void editCart(Stage stage){
 		Stage editCartStage=new Stage();
-		editCartStage.setTitle("Edit cart");
+		editCartStage.setTitle("View/ Edit cart");
 		GridPane grid = new GridPane();
 		Scene editCartScene=new Scene(grid, 800, 800);
 		editCartScene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
@@ -937,10 +937,8 @@ public class Main extends Application {
 		grid.setHgap(10);
 		grid.setVgap(10);
 		grid.setPadding(new Insets(25, 25, 25, 25));
-		Text scenetitle = new Text("Press on the show cart Button to show your current cart content\n"
-				+ "or enter the ISBN of the book and press delete to remove the entry\n"
-				+ "or enter the ISBN & The new quantity of the book & press update \n"
-				+ "to edit your cart's quantity:");
+		Text scenetitle = new Text("Press on the view cart Button to show your current cart content\n"
+				+ "Click the Check Out button to check out");
 		scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
 		grid.add(scenetitle, 0, 0, 2, 1);
 
@@ -1024,7 +1022,7 @@ public class Main extends Application {
 
 				try{
 					
-					checkedOut.setText("Check Out successfully!");
+					checkedOut.setText("Check Out successful!");
 										
 				}catch (Exception ex) {
 					
