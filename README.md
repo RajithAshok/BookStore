@@ -7,6 +7,7 @@ A Bookstore Management System built using JavaFx and MySQL
 ![BookshopLogin](https://user-images.githubusercontent.com/64261299/210264806-6041c13f-ca93-4f75-82df-feb2591d9280.png)
 
 
+<img src="https://user-images.githubusercontent.com/64261299/210264825-b3788125-1ee3-4f50-bede-b947909d6cba.png" width=200 height=100>
 ![BookshopSignUp](https://user-images.githubusercontent.com/64261299/210264825-b3788125-1ee3-4f50-bede-b947909d6cba.png)
 
 
